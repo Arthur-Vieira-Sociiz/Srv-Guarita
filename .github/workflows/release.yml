@@ -1,0 +1,45 @@
+name: Publicar instalador Windows
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Gerar e publicar release
+    runs-on: windows-latest
+
+    steps:
+      - name: Baixar código da tag
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Instalar dependências
+        run: npm ci
+
+      - name: Garantir correspondência entre tag e versão
+        shell: pwsh
+        run: |
+          $version = node -p "require('./package.json').version"
+          if ("v$version" -ne $env:GITHUB_REF_NAME) {
+            throw "A tag $env:GITHUB_REF_NAME não corresponde à versão $version do package.json."
+          }
+
+      - name: Gerar instalador e arquivos de atualização
+        run: npm run package
+
+      - name: Criar release e enviar arquivos
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create $env:GITHUB_REF_NAME --title "Guarita Sociiz $env:GITHUB_REF_NAME" --generate-notes release/*.exe release/*.blockmap release/latest.yml
