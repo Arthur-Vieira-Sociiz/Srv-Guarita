@@ -35,7 +35,7 @@ jobs:
           }
 
       - name: Gerar instalador e arquivos de atualização
-        run: npm run package
+        run: npm run package -- --publish never
 
       - name: Criar release e enviar arquivos
         shell: pwsh
