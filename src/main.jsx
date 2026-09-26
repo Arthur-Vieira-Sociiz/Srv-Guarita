@@ -118,7 +118,7 @@ function App() {
       aria-label="Abrir configurações da guarita"
       title="Toque para abrir as configurações"
     >
-      <img className="detran-logo" src="/assets/detran-al.png" alt="DETRAN Alagoas" />
+      <img className="detran-logo" src="./assets/detran-al.png" alt="DETRAN Alagoas" />
       <time className="header-clock">{formatClock(clock)}</time>
     </header>
 
