@@ -1,0 +1,19 @@
+# Dependencies and generated frontend files
+node_modules/
+dist/
+
+# Electron packages and installers
+release/
+*.blockmap
+*.exe
+
+# Local settings, logs and credentials
+.env
+.env.*
+*.log
+
+# Editor and operating-system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

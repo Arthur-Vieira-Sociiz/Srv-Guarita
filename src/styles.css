@@ -1,0 +1,42 @@
+:root { font-family: Arial, Helvetica, sans-serif; color: #151c2e; background: #fff; }
+* { box-sizing: border-box; }
+html, body, #root { width: 100%; min-height: 100%; margin: 0; overflow-x: hidden; }
+body { min-width: 0; min-height: 0; }
+button, input { font: inherit; }
+button { cursor: pointer; }
+.app-shell { height: 100dvh; min-height: 0; display: flex; flex-direction: column; overflow: hidden; background: #fff; }
+.topbar { height: 100px; margin: 0; padding: 0 49px; display: flex; align-items: center; justify-content: space-between; background: #2e66a3; border-bottom: 1px solid #1f578f; cursor: pointer; user-select: none; }
+.topbar:focus-visible { outline: 3px solid #87c7e5; outline-offset: -3px; }
+.detran-logo { width: 164px; height: auto; filter: brightness(0) invert(1); }
+.header-clock { color: #fff; font-size: 20px; font-weight: 700; white-space: nowrap; }
+.content { width: min(1300px, calc(100vw - 44px)); min-width: 0; margin: 0 auto; padding: 23px 0 12px; flex: 1; overflow: hidden; }
+.reading-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.vehicle-card, .identity-card { padding: 0; background: #fff; color: #151c2e; min-width: 0; }
+.card-label { margin: 0 0 5px; font-size: 14px; line-height: 18px; font-weight: 500; }
+.vehicle-image, .plate-image { overflow: hidden; background: #e8ecee; border-radius: 3px; }
+.vehicle-image img, .plate-image img { width: 100%; display: block; object-fit: cover; }
+.vehicle-image img { aspect-ratio: 1.2; }
+.plate-image img { aspect-ratio: 2.22; }
+.empty-media { background: #fff; border: 1px solid #edf0f2; }
+.vehicle-image.empty-media { aspect-ratio: 1.2; }
+.plate-image.empty-media { aspect-ratio: 2.22; }
+.identified-title { margin: 18px 0 10px; font-size: 14px; font-weight: 500; }
+.identity-row { display: grid; grid-template-columns: 1fr 1.25fr; gap: 22px; }
+.info-section { min-width: 0; }
+.field-label { display: block; margin-bottom: 6px; font-size: 12px; font-weight: 600; }
+.plate { display: block; font-size: clamp(23px, 2.1vw, 29px); font-weight: 500; line-height: 1; }
+.person-name { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: clamp(21px, 2vw, 28px); font-weight: 500; line-height: 1; }
+.authorization { display: flex; align-items: center; gap: 13px; margin-top: 15px; min-height: 63px; padding: 11px 12px; border-left: 4px solid; border-radius: 3px; color: #202d32; }
+.authorization .check { display: grid; place-items: center; width: 20px; height: 20px; border: 2px solid; border-radius: 50%; font-size: 13px; font-weight: 800; }
+.authorization.authorized { border-color: #069c61; background: #e7f8f1; }.authorization.authorized .check { border-color: #09a56a; color: #079864; }
+.authorization.denied { border-color: #dc5156; background: #ffc6c7; }.authorization.denied .check { border-color: #cc3d44; color: #b82d35; }
+.authorization.scheduled-denied { border-color: #ef8b40; background: #ffdcba; }.authorization.scheduled-denied .check { border-color: #df7424; color: #c55d11; }
+.authorization strong { display: block; font-size: 14px; font-weight: 600; }.authorization span:not(.check) { display: block; margin-top: 5px; font-size: 14px; }
+.statusbar { height: 20px; padding: 0 22px; color: #9da6ad; font-size: 10px; }
+.modal-backdrop { position: fixed; inset: 0; display: grid; place-items: center; padding: 24px; background: rgba(14, 30, 46, .44); backdrop-filter: blur(3px); z-index: 3; }
+.settings-modal { width: min(570px, 100%); border-radius: 7px; padding: 30px; background: #fff; color: #1a2530; box-shadow: 0 18px 45px rgba(0,0,0,.24); }
+.modal-heading { display: flex; justify-content: space-between; gap: 14px; align-items: flex-start; }.eyebrow { font-size: 11px; letter-spacing: .12em; font-weight: 700; color: #4776a4; }.modal-heading h1 { margin: 6px 0 0; font-size: 25px; }.close-button { border: 0; background: transparent; color: #4a5e6b; font-size: 31px; line-height: .8; }
+.settings-modal > p { color: #586873; font-size: 14px; line-height: 1.5; margin: 23px 0; }.settings-modal label { display: block; margin-top: 17px; color: #283740; font-size: 14px; font-weight: 650; }.settings-modal input { display: block; width: 100%; color: #1d2d36; background: #fff; border: 1px solid #aebec8; border-radius: 4px; padding: 12px; margin-top: 8px; outline: none; }.settings-modal input:focus { border-color: #2e66a3; box-shadow: 0 0 0 3px rgba(46,102,163,.13); }.settings-modal small { color: #687984; display: block; font-size: 12px; font-weight: 400; margin-top: 5px; }
+.modal-actions { display: flex; justify-content: end; gap: 10px; margin-top: 30px; }.primary-button, .secondary-button { padding: 11px 15px; border-radius: 4px; border: 1px solid transparent; font-weight: 700; }.primary-button { background: #2e66a3; color: #fff; }.primary-button:disabled { opacity: .7; cursor: wait; }.secondary-button { background: #fff; border-color: #8ea5b3; color: #354e5b; }
+@media (max-width: 1000px) { .topbar { padding: 0 34px; }.content { width: calc(100vw - 32px); }.reading-grid { gap: 14px; }.identity-row { gap: 13px; } }
+@media (max-width: 700px) { .topbar { height: 76px; padding: 0 18px; }.detran-logo { width: 122px; }.header-clock { font-size: 14px; }.content { padding-top: 14px; }.reading-grid { grid-template-columns: minmax(0, 1fr); overflow-y: auto; }.statusbar { display: none; } }
