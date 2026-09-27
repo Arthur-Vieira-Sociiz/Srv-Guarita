@@ -11,6 +11,7 @@ const store = new Store({
   defaults: {
     serverUrl: "http://localhost:80",
     cameraId: "",
+    syncIntervalSeconds: 3,
   },
 });
 
@@ -105,11 +106,15 @@ app.whenReady().then(() => {
   ipcMain.handle("settings:save", (_event, value) => {
     const serverUrl = String(value?.serverUrl || "").trim().replace(/\/$/, "");
     const cameraId = String(value?.cameraId || "").trim();
+    const syncIntervalSeconds = Number(value?.syncIntervalSeconds);
 
     if (!/^https?:\/\/[^\s]+$/i.test(serverUrl)) {
       throw new Error("Informe uma URL de servidor válida, começando com http:// ou https://.");
     }
-    store.set({ serverUrl, cameraId });
+    if (!Number.isInteger(syncIntervalSeconds) || syncIntervalSeconds < 1 || syncIntervalSeconds > 3600) {
+      throw new Error("Informe um tempo de sincronização entre 1 e 3600 segundos.");
+    }
+    store.set({ serverUrl, cameraId, syncIntervalSeconds });
     return store.store;
   });
   ipcMain.handle("reading:get-latest", () => getLatestReading());

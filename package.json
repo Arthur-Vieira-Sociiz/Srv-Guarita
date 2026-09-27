@@ -1,6 +1,6 @@
 {
   "name": "srv-guarita",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "private": true,
   "author": "Sociiz",
   "description": "Painel desktop de monitoramento da guarita.",

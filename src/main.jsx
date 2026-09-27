@@ -49,7 +49,7 @@ function formatClock(date) {
 }
 
 function App() {
-  const [settings, setSettings] = useState({ serverUrl: "http://localhost:80", cameraId: "" });
+  const [settings, setSettings] = useState({ serverUrl: "http://localhost:80", cameraId: "", syncIntervalSeconds: 3 });
   const [reading, setReading] = useState(null);
   const [form, setForm] = useState(settings);
   const [showSettings, setShowSettings] = useState(false);
@@ -73,6 +73,7 @@ function App() {
   useEffect(() => {
     let active = true;
     setReading(null);
+    const intervalMilliseconds = Math.max(1, Number(settings.syncIntervalSeconds) || 3) * 1_000;
     async function refreshReading() {
       try {
         const latestReading = await window.guarita.getLatestReading();
@@ -82,9 +83,9 @@ function App() {
       }
     }
     refreshReading();
-    const timer = window.setInterval(refreshReading, 3_000);
+    const timer = window.setInterval(refreshReading, intervalMilliseconds);
     return () => { active = false; window.clearInterval(timer); };
-  }, [settings.serverUrl, settings.cameraId]);
+  }, [settings.serverUrl, settings.cameraId, settings.syncIntervalSeconds]);
 
   async function save(event) {
     event.preventDefault();
@@ -159,6 +160,7 @@ function App() {
         <p>Esses dados ficam armazenados somente neste computador e serão usados na conexão com o servidor.</p>
         <label>Endereço do servidor<input required type="url" value={form.serverUrl} placeholder="http://localhost:80" onChange={(e) => setForm({ ...form, serverUrl: e.target.value })} /></label>
         <label>ID da câmera<input value={form.cameraId} placeholder="Ex.: ENTRADA-01" onChange={(e) => setForm({ ...form, cameraId: e.target.value })} /></label>
+        <label>Tempo de sincronização (segundos)<input required type="number" min="1" max="3600" step="1" value={form.syncIntervalSeconds ?? 3} onChange={(e) => setForm({ ...form, syncIntervalSeconds: e.target.value })} /></label>
         <div className="modal-actions"><button type="button" className="secondary-button" onClick={() => setShowSettings(false)}>Cancelar</button><button className="primary-button" disabled={saving}>{saving ? "Salvando..." : "Salvar configurações"}</button></div>
       </form>
     </div>}
