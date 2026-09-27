@@ -4,7 +4,8 @@ import "./styles.css";
 
 function toImageSource(base64) {
   if (!base64) return null;
-  return base64.startsWith("data:image/") ? base64 : `data:image/jpeg;base64,${base64}`;
+  const value = String(base64).trim();
+  return value.startsWith("data:image/") ? value : `data:image/jpeg;base64,${value}`;
 }
 
 function mapReading(reading) {

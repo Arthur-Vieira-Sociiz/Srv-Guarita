@@ -43,7 +43,12 @@ async function getLatestReading() {
 
     if (!response.ok) throw new Error(`Servidor retornou HTTP ${response.status}.`);
     const payload = await response.json();
-    return payload?.sucesso && payload?.leituraCamera ? payload.leituraCamera : null;
+    if (!payload?.sucesso) return null;
+
+    // Aceita tanto o contrato inicial (leituraCamera aninhada) quanto o
+    // retorno atual, que expõe os dados diretamente na raiz do JSON.
+    const reading = payload.leituraCamera || payload;
+    return reading?.idDispositivo ? reading : null;
   } finally {
     clearTimeout(timeout);
   }
