@@ -9,14 +9,14 @@ button { cursor: pointer; }
 .topbar:focus-visible { outline: 3px solid #87c7e5; outline-offset: -3px; }
 .detran-logo { width: 164px; height: auto; filter: brightness(0) invert(1); }
 .header-clock { color: #fff; font-size: 20px; font-weight: 700; white-space: nowrap; }
-.content { width: min(1300px, calc(100vw - 44px)); min-width: 0; margin: 0 auto; padding: 23px 0 12px; flex: 1; overflow: hidden; }
-.reading-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.content { width: 100%; min-width: 0; margin: 0 auto; padding: clamp(14px, 2vw, 30px) clamp(20px, 3vw, 54px) 12px; flex: 1; overflow: hidden; }
+.reading-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(14px, 1.5vw, 28px); }
 .vehicle-card, .identity-card { padding: 0; background: #fff; color: #151c2e; min-width: 0; }
 .card-label { margin: 0 0 5px; font-size: 14px; line-height: 18px; font-weight: 500; }
-.vehicle-image, .plate-image { overflow: hidden; background: #e8ecee; border-radius: 3px; }
-.vehicle-image img, .plate-image img { width: 100%; display: block; object-fit: cover; }
-.vehicle-image img { aspect-ratio: 1.2; }
-.plate-image img { aspect-ratio: 2.22; }
+.vehicle-image, .plate-image { display: flex; align-items: center; justify-content: center; overflow: hidden; background: #fff; border-radius: 3px; }
+.vehicle-image { aspect-ratio: 1.2; }
+.plate-image { aspect-ratio: 2.22; }
+.vehicle-image img, .plate-image img { width: 100%; height: 100%; display: block; object-fit: contain; }
 .empty-media { background: #fff; border: 1px solid #edf0f2; }
 .vehicle-image.empty-media { aspect-ratio: 1.2; }
 .plate-image.empty-media { aspect-ratio: 2.22; }
@@ -38,5 +38,5 @@ button { cursor: pointer; }
 .modal-heading { display: flex; justify-content: space-between; gap: 14px; align-items: flex-start; }.eyebrow { font-size: 11px; letter-spacing: .12em; font-weight: 700; color: #4776a4; }.modal-heading h1 { margin: 6px 0 0; font-size: 25px; }.close-button { border: 0; background: transparent; color: #4a5e6b; font-size: 31px; line-height: .8; }
 .settings-modal > p { color: #586873; font-size: 14px; line-height: 1.5; margin: 23px 0; }.settings-modal label { display: block; margin-top: 17px; color: #283740; font-size: 14px; font-weight: 650; }.settings-modal input { display: block; width: 100%; color: #1d2d36; background: #fff; border: 1px solid #aebec8; border-radius: 4px; padding: 12px; margin-top: 8px; outline: none; }.settings-modal input:focus { border-color: #2e66a3; box-shadow: 0 0 0 3px rgba(46,102,163,.13); }.settings-modal small { color: #687984; display: block; font-size: 12px; font-weight: 400; margin-top: 5px; }
 .modal-actions { display: flex; justify-content: end; gap: 10px; margin-top: 30px; }.primary-button, .secondary-button { padding: 11px 15px; border-radius: 4px; border: 1px solid transparent; font-weight: 700; }.primary-button { background: #2e66a3; color: #fff; }.primary-button:disabled { opacity: .7; cursor: wait; }.secondary-button { background: #fff; border-color: #8ea5b3; color: #354e5b; }
-@media (max-width: 1000px) { .topbar { padding: 0 34px; }.content { width: calc(100vw - 32px); }.reading-grid { gap: 14px; }.identity-row { gap: 13px; } }
+@media (max-width: 1000px) { .topbar { padding: 0 34px; }.content { padding-inline: 20px; }.reading-grid { gap: 14px; }.identity-row { gap: 13px; } }
 @media (max-width: 700px) { .topbar { height: 76px; padding: 0 18px; }.detran-logo { width: 122px; }.header-clock { font-size: 14px; }.content { padding-top: 14px; }.reading-grid { grid-template-columns: minmax(0, 1fr); overflow-y: auto; }.statusbar { display: none; } }
